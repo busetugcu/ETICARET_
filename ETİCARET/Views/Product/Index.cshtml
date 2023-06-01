@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ETİCARET.Entity.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="mt-2">ÜRÜNLER</h2>
+
+<p>
+    @Html.ActionLink("Ürün Ekle", "Create" , null, new {@class="btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsHome)
+        </th>
+        <th style="width:140px;"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+             <img src="~/Content/images/@item.Image" width="60" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stock)
+        </td>
+        <td>
+            @if (item.IsApproved)
+            {
+                @*@Html.DisplayFor(modelItem => item.IsApproved)*@
+                <i class="fa-regular fa-circle-check"></i>
+            }
+            else
+            {
+                <i class="fa-regular fa-circle-xmark"></i>
+                
+            }
+        </td>
+        <td>
+            @if (item.IsHome)
+            {
+                @*@Html.DisplayFor(modelItem => item.IsHome)*@
+                <i class="fa-regular fa-circle-xmark"></i>
+            }
+            else
+            {
+                 <i class="fa-regular fa-circle-xmark"></i>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Güncelle", "Edit", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
+            @Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+        </td>
+    </tr>
+}
+
+</table>
